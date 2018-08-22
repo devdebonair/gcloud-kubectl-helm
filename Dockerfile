@@ -1,11 +1,5 @@
 FROM docker:latest
 
-ENV KEYFILE=example/gcp-credentials.json
-ENV PROJECT=
-ENV ZONE=
-ENV CLUSTER=
-ENV SERVICE_ACCOUNT=
-
 WORKDIR /root
 
 # System
@@ -30,10 +24,3 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
 
 # Helm
 RUN curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
-
-# Authenticate
-RUN mkdir -p /gcp
-COPY authenticate.bash /root/authenticate.bash
-COPY $KEYFILE /gcp/gcp-credentials.json
-
-CMD ["/bin/bash"]
